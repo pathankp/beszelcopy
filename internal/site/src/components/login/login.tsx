@@ -20,7 +20,7 @@ export default function () {
 	useEffect(() => {
 		document.title = t`Login` + " / Beszel"
 
-		pb.send("/api/beszel/first-run", {}).then(({ firstRun }) => {
+		pb.send("/api/sonar/first-run", {}).then(({ firstRun }) => {
 			setFirstRun(firstRun)
 		})
 	}, [])

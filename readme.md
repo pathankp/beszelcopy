@@ -1,6 +1,6 @@
-# Beszel
+# SONAR
 
-Beszel is a lightweight server monitoring platform that includes Docker statistics, historical data, and alert functions.
+SONAR is a lightweight server monitoring platform that includes Docker statistics, historical data, and alert functions.
 
 It has a friendly web interface, simple configuration, and is ready to use out of the box. It supports automatic backup, multi-user, OAuth authentication, and API access.
 
@@ -9,7 +9,7 @@ It has a friendly web interface, simple configuration, and is ready to use out o
 [![MIT license](https://img.shields.io/github/license/henrygd/beszel?color=%239944ee)](https://github.com/henrygd/beszel/blob/main/LICENSE)
 [![Crowdin](https://badges.crowdin.net/beszel/localized.svg)](https://crowdin.com/project/beszel)
 
-![Screenshot of Beszel dashboard and system page, side by side. The dashboard shows metrics from multiple connected systems, while the system page shows detailed metrics for a single system.](https://henrygd-assets.b-cdn.net/beszel/screenshot-new.png)
+![Screenshot of SONAR dashboard and system page, side by side. The dashboard shows metrics from multiple connected systems, while the system page shows detailed metrics for a single system.](https://henrygd-assets.b-cdn.net/beszel/screenshot-new.png)
 
 ## Features
 
@@ -24,7 +24,7 @@ It has a friendly web interface, simple configuration, and is ready to use out o
 
 ## Architecture
 
-Beszel consists of two main components: the **hub** and the **agent**.
+SONAR consists of two main components: the **hub** and the **agent**.
 
 - **Hub**: A web application built on [PocketBase](https://pocketbase.io/) that provides a dashboard for viewing and managing connected systems.
 - **Agent**: Runs on each system you want to monitor and communicates system metrics to the hub.
@@ -67,4 +67,4 @@ Support requests and general discussion can be posted on [GitHub discussions](ht
 
 ## License
 
-Beszel is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+SONAR is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.

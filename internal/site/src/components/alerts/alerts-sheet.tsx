@@ -18,7 +18,7 @@ import type { AlertInfo, AlertRecord, SystemRecord } from "@/types"
 
 const Slider = lazy(() => import("@/components/ui/slider"))
 
-const endpoint = "/api/beszel/user-alerts"
+const endpoint = "/api/sonar/user-alerts"
 
 const alertDebounce = 100
 

@@ -1696,7 +1696,7 @@ echo "189  187      412  67  1.80  2.45   1950    823   8.50    2   1    15.00  
 	}
 
 	// Set device selector via prefixed env var
-	t.Setenv("BESZEL_AGENT_INTEL_GPU_DEVICE", "sriov")
+	t.Setenv("SONAR_AGENT_INTEL_GPU_DEVICE", "sriov")
 
 	gm := &GPUManager{GpuDataMap: make(map[string]*system.GPUData)}
 	if err := gm.collectIntelStats(); err != nil {

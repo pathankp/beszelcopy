@@ -331,33 +331,33 @@ func TestNewSensorConfigWithEnv(t *testing.T) {
 
 func TestNewSensorConfig(t *testing.T) {
 	// Save original environment variables
-	originalPrimary, hasPrimary := os.LookupEnv("BESZEL_AGENT_PRIMARY_SENSOR")
-	originalSys, hasSys := os.LookupEnv("BESZEL_AGENT_SYS_SENSORS")
-	originalSensors, hasSensors := os.LookupEnv("BESZEL_AGENT_SENSORS")
+	originalPrimary, hasPrimary := os.LookupEnv("SONAR_AGENT_PRIMARY_SENSOR")
+	originalSys, hasSys := os.LookupEnv("SONAR_AGENT_SYS_SENSORS")
+	originalSensors, hasSensors := os.LookupEnv("SONAR_AGENT_SENSORS")
 
 	// Restore environment variables after the test
 	defer func() {
 		// Clean up test environment variables
-		os.Unsetenv("BESZEL_AGENT_PRIMARY_SENSOR")
-		os.Unsetenv("BESZEL_AGENT_SYS_SENSORS")
-		os.Unsetenv("BESZEL_AGENT_SENSORS")
+		os.Unsetenv("SONAR_AGENT_PRIMARY_SENSOR")
+		os.Unsetenv("SONAR_AGENT_SYS_SENSORS")
+		os.Unsetenv("SONAR_AGENT_SENSORS")
 
 		// Restore original values if they existed
 		if hasPrimary {
-			os.Setenv("BESZEL_AGENT_PRIMARY_SENSOR", originalPrimary)
+			os.Setenv("SONAR_AGENT_PRIMARY_SENSOR", originalPrimary)
 		}
 		if hasSys {
-			os.Setenv("BESZEL_AGENT_SYS_SENSORS", originalSys)
+			os.Setenv("SONAR_AGENT_SYS_SENSORS", originalSys)
 		}
 		if hasSensors {
-			os.Setenv("BESZEL_AGENT_SENSORS", originalSensors)
+			os.Setenv("SONAR_AGENT_SENSORS", originalSensors)
 		}
 	}()
 
 	// Set test environment variables
-	os.Setenv("BESZEL_AGENT_PRIMARY_SENSOR", "test_primary")
-	os.Setenv("BESZEL_AGENT_SYS_SENSORS", "/test/path")
-	os.Setenv("BESZEL_AGENT_SENSORS", "test_sensor1,test_*,test_sensor3")
+	os.Setenv("SONAR_AGENT_PRIMARY_SENSOR", "test_primary")
+	os.Setenv("SONAR_AGENT_SYS_SENSORS", "/test/path")
+	os.Setenv("SONAR_AGENT_SENSORS", "test_sensor1,test_*,test_sensor3")
 
 	agent := &Agent{}
 	result := agent.newSensorConfig()

@@ -349,7 +349,7 @@ export default function DisksTable({ systemId }: { systemId?: string }) {
 		if (!disk.system) return
 		setRowActionState({ type: "refresh", id: disk.id })
 		try {
-			await pb.send("/api/beszel/smart/refresh", {
+			await pb.send("/api/sonar/smart/refresh", {
 				method: "POST",
 				query: { system: disk.system },
 			})

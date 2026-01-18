@@ -100,7 +100,7 @@ export function UserAuthForm({
 						setErrors({ passwordConfirm: msg })
 						return
 					}
-					await pb.send("/api/beszel/create-user", {
+					await pb.send("/api/sonar/create-user", {
 						method: "POST",
 						body: JSON.stringify({ email, password }),
 					})

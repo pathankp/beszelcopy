@@ -197,16 +197,16 @@ func TestConnectionManager_WebSocketConnectionFlow(t *testing.T) {
 	assert.Equal(t, Disconnected, cm.State, "State should remain Disconnected after failed connection")
 
 	// Test with invalid URL
-	os.Setenv("BESZEL_AGENT_HUB_URL", "invalid-url")
-	os.Setenv("BESZEL_AGENT_TOKEN", "test-token")
+	os.Setenv("SONAR_AGENT_HUB_URL", "invalid-url")
+	os.Setenv("SONAR_AGENT_TOKEN", "test-token")
 	defer func() {
-		os.Unsetenv("BESZEL_AGENT_HUB_URL")
-		os.Unsetenv("BESZEL_AGENT_TOKEN")
+		os.Unsetenv("SONAR_AGENT_HUB_URL")
+		os.Unsetenv("SONAR_AGENT_TOKEN")
 	}()
 
 	// Test with missing token
-	os.Setenv("BESZEL_AGENT_HUB_URL", "http://localhost:8080")
-	os.Unsetenv("BESZEL_AGENT_TOKEN")
+	os.Setenv("SONAR_AGENT_HUB_URL", "http://localhost:8080")
+	os.Unsetenv("SONAR_AGENT_TOKEN")
 
 	_, err2 := newWebSocketClient(agent)
 	assert.Error(t, err2, "WebSocket client creation should fail without token")
@@ -235,11 +235,11 @@ func TestConnectionManager_ConnectWithRateLimit(t *testing.T) {
 	cm := agent.connectionManager
 
 	// Set up environment for WebSocket client creation
-	os.Setenv("BESZEL_AGENT_HUB_URL", "ws://localhost:8080")
-	os.Setenv("BESZEL_AGENT_TOKEN", "test-token")
+	os.Setenv("SONAR_AGENT_HUB_URL", "ws://localhost:8080")
+	os.Setenv("SONAR_AGENT_TOKEN", "test-token")
 	defer func() {
-		os.Unsetenv("BESZEL_AGENT_HUB_URL")
-		os.Unsetenv("BESZEL_AGENT_TOKEN")
+		os.Unsetenv("SONAR_AGENT_HUB_URL")
+		os.Unsetenv("SONAR_AGENT_TOKEN")
 	}()
 
 	// Create WebSocket client
@@ -286,11 +286,11 @@ func TestConnectionManager_CloseWebSocket(t *testing.T) {
 	}, "Should not panic when closing nil WebSocket client")
 
 	// Set up environment and create WebSocket client
-	os.Setenv("BESZEL_AGENT_HUB_URL", "ws://localhost:8080")
-	os.Setenv("BESZEL_AGENT_TOKEN", "test-token")
+	os.Setenv("SONAR_AGENT_HUB_URL", "ws://localhost:8080")
+	os.Setenv("SONAR_AGENT_TOKEN", "test-token")
 	defer func() {
-		os.Unsetenv("BESZEL_AGENT_HUB_URL")
-		os.Unsetenv("BESZEL_AGENT_TOKEN")
+		os.Unsetenv("SONAR_AGENT_HUB_URL")
+		os.Unsetenv("SONAR_AGENT_TOKEN")
 	}()
 
 	wsClient, err := newWebSocketClient(agent)

@@ -161,12 +161,12 @@ func TestGetServicePatterns(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// Clean up any existing env vars
-			os.Unsetenv("BESZEL_AGENT_SERVICE_PATTERNS")
+			os.Unsetenv("SONAR_AGENT_SERVICE_PATTERNS")
 			os.Unsetenv("SERVICE_PATTERNS")
 
 			// Set up environment variables
 			if tt.prefixedEnv != "" {
-				os.Setenv("BESZEL_AGENT_SERVICE_PATTERNS", tt.prefixedEnv)
+				os.Setenv("SONAR_AGENT_SERVICE_PATTERNS", tt.prefixedEnv)
 			}
 			if tt.unprefixedEnv != "" {
 				os.Setenv("SERVICE_PATTERNS", tt.unprefixedEnv)
@@ -180,7 +180,7 @@ func TestGetServicePatterns(t *testing.T) {
 
 			// Cleanup
 			if tt.cleanupEnvVars {
-				os.Unsetenv("BESZEL_AGENT_SERVICE_PATTERNS")
+				os.Unsetenv("SONAR_AGENT_SERVICE_PATTERNS")
 				os.Unsetenv("SERVICE_PATTERNS")
 			}
 		})

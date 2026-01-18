@@ -44,13 +44,13 @@ func TestGetDataDir(t *testing.T) {
 		oldValue := os.Getenv("DATA_DIR")
 		defer func() {
 			if oldValue == "" {
-				os.Unsetenv("BESZEL_AGENT_DATA_DIR")
+				os.Unsetenv("SONAR_AGENT_DATA_DIR")
 			} else {
-				os.Setenv("BESZEL_AGENT_DATA_DIR", oldValue)
+				os.Setenv("SONAR_AGENT_DATA_DIR", oldValue)
 			}
 		}()
 
-		os.Setenv("BESZEL_AGENT_DATA_DIR", tempDir)
+		os.Setenv("SONAR_AGENT_DATA_DIR", tempDir)
 
 		result, err := getDataDir()
 		require.NoError(t, err)

@@ -142,7 +142,7 @@ const SectionUniversalToken = memo(() => {
 
 	async function updateToken(enable: number = -1, permanent: number = -1) {
 		// enable: 0 for disable, 1 for enable, -1 (unset) for get current state
-		const data = await pb.send(`/api/beszel/universal-token`, {
+		const data = await pb.send(`/api/sonar/universal-token`, {
 			query: {
 				token,
 				enable,
