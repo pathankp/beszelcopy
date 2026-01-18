@@ -280,6 +280,10 @@ func (h *Hub) registerApiRoutes(se *core.ServeEvent) error {
         // get container info
         apiAuth.GET("/containers/info", h.getContainerInfo)
     }
+    // command execution routes
+    if err := h.registerCommandRoutes(se); err != nil {
+        return err
+    }
     return nil
 }
 

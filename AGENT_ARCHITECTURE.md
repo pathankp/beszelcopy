@@ -27,10 +27,10 @@ The SONAR agent is a lightweight monitoring daemon written in Go that collects s
 │  ├─ Temperature Sensors                                     │
 │  └─ Battery Monitoring                                      │
 ├─────────────────────────────────────────────────────────────┤
-│  Extension Framework (Phase 0.1)                            │
-│  ├─ Command Execution (stub)                               │
-│  ├─ Service Management (stub)                              │
-│  └─ File Operations (stub)                                 │
+│  Extension Framework                                        │
+│  ├─ Command Execution (Phase 0.2 - Complete)              │
+│  ├─ Service Management (stub - Phase 0.3)                  │
+│  └─ File Operations (stub - Phase 0.4)                     │
 ├─────────────────────────────────────────────────────────────┤
 │  Cache & Storage                                            │
 │  ├─ System Data Cache                                      │
@@ -182,10 +182,21 @@ type DeltaTracker[K comparable, V constraints.Integer] struct {
 The agent includes stub implementations for future functionality:
 
 #### Command Execution (`agent/cmd.go`)
-- **Framework**: Command execution structure
-- **Validation**: Command whitelist/blacklist support (stub)
-- **Timeout**: Configurable command timeouts
-- **Status**: Not yet implemented
+- **Framework**: Complete command execution implementation (Phase 0.2)
+- **Validation**: Command whitelist/blacklist support with path validation
+- **Timeout**: Configurable command timeouts with context cancellation
+- **Security**: Injection prevention, output size limits, rate limiting
+- **History**: In-memory command history (last 100 commands)
+- **Rate Limiting**: Configurable rate limits per client (default: 10/min)
+- **Concurrent Limits**: Max concurrent executions (default: 5)
+- **Environment Variables**: Support for custom environment variables with validation
+- **Status**: Fully implemented and tested
+- **Configuration**:
+  - `SONAR_AGENT_COMMAND_WHITELIST`: Allowed commands (JSON array or comma-separated)
+  - `SONAR_AGENT_ALLOWED_PATHS`: Allowed command paths (default: /usr/bin, /bin, etc.)
+  - `SONAR_AGENT_COMMAND_MAX_OUTPUT`: Max output size in bytes (default: 1MB)
+  - `SONAR_AGENT_COMMAND_RATE_LIMIT`: Commands per minute (default: 10)
+  - `SONAR_AGENT_COMMAND_MAX_CONCURRENT`: Max concurrent executions (default: 5)
 
 #### Service Management (`agent/services.go`)
 - **Operations**: Start, stop, restart, enable, disable
@@ -415,9 +426,9 @@ go func() {
 
 ### Phase Roadmap
 
-- **Phase 0.1** (Current): Rename to SONAR, PostgreSQL, framework stubs
-- **Phase 0.2**: Command execution implementation
-- **Phase 0.3**: Service management implementation
+- **Phase 0.1**: Rename to SONAR, PostgreSQL, framework stubs ✅ Complete
+- **Phase 0.2**: Command execution implementation ✅ Complete
+- **Phase 0.3**: Service management implementation (next)
 - **Phase 0.4**: File operations implementation
 - **Phase 1.0**: Full feature set with security hardening
 

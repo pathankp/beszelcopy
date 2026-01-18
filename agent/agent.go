@@ -49,6 +49,7 @@ type Agent struct {
     keys                      []gossh.PublicKey                                     // SSH public keys
     smartManager              *SmartManager                                         // Manages SMART data
     systemdManager            *systemdManager                                       // Manages systemd services
+    commandExecutor           *CommandExecutor                                       // Manages command execution with security controls
 }
 
 // NewAgent creates a new agent with the given data directory for persisting data.
