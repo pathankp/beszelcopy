@@ -310,7 +310,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "POST /test-notification - no auth should fail",
 			Method:          http.MethodPost,
-			URL:             "/api/beszel/test-notification",
+			URL:             "/api/sonar/test-notification",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -321,7 +321,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:           "POST /test-notification - with auth should succeed",
 			Method:         http.MethodPost,
-			URL:            "/api/beszel/test-notification",
+			URL:            "/api/sonar/test-notification",
 			TestAppFactory: testAppFactory,
 			Headers: map[string]string{
 				"Authorization": userToken,
@@ -335,7 +335,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "GET /config-yaml - no auth should fail",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/config-yaml",
+			URL:             "/api/sonar/config-yaml",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -343,7 +343,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /config-yaml - with user auth should fail",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/config-yaml",
+			URL:    "/api/sonar/config-yaml",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -354,7 +354,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /config-yaml - with admin auth should succeed",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/config-yaml",
+			URL:    "/api/sonar/config-yaml",
 			Headers: map[string]string{
 				"Authorization": adminUserToken,
 			},
@@ -365,7 +365,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "GET /universal-token - no auth should fail",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/universal-token",
+			URL:             "/api/sonar/universal-token",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -373,7 +373,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /universal-token - with auth should succeed",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/universal-token",
+			URL:    "/api/sonar/universal-token",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -384,7 +384,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /universal-token - enable permanent should succeed",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/universal-token?enable=1&permanent=1&token=permanent-token-123",
+			URL:    "/api/sonar/universal-token?enable=1&permanent=1&token=permanent-token-123",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -395,7 +395,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "POST /user-alerts - no auth should fail",
 			Method:          http.MethodPost,
-			URL:             "/api/beszel/user-alerts",
+			URL:             "/api/sonar/user-alerts",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -409,7 +409,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "POST /user-alerts - with auth should succeed",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -426,7 +426,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "DELETE /user-alerts - no auth should fail",
 			Method:          http.MethodDelete,
-			URL:             "/api/beszel/user-alerts",
+			URL:             "/api/sonar/user-alerts",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -438,7 +438,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "DELETE /user-alerts - with auth should succeed",
 			Method: http.MethodDelete,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -463,7 +463,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "GET /containers/logs - no auth should fail",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/containers/logs?system=test-system&container=test-container",
+			URL:             "/api/sonar/containers/logs?system=test-system&container=test-container",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -471,7 +471,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /containers/logs - with auth but missing system param should fail",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/containers/logs?container=test-container",
+			URL:    "/api/sonar/containers/logs?container=test-container",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -482,7 +482,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /containers/logs - with auth but missing container param should fail",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/containers/logs?system=test-system",
+			URL:    "/api/sonar/containers/logs?system=test-system",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -493,7 +493,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /containers/logs - with auth but invalid system should fail",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/containers/logs?system=invalid-system&container=test-container",
+			URL:    "/api/sonar/containers/logs?system=invalid-system&container=test-container",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -506,7 +506,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "GET /getkey - no auth should fail",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/getkey",
+			URL:             "/api/sonar/getkey",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -514,7 +514,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /getkey - with auth should also succeed",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/getkey",
+			URL:    "/api/sonar/getkey",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -525,7 +525,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "GET /first-run - no auth should succeed",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/first-run",
+			URL:             "/api/sonar/first-run",
 			ExpectedStatus:  200,
 			ExpectedContent: []string{"\"firstRun\":false"},
 			TestAppFactory:  testAppFactory,
@@ -533,7 +533,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "GET /first-run - with auth should also succeed",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/first-run",
+			URL:    "/api/sonar/first-run",
 			Headers: map[string]string{
 				"Authorization": userToken,
 			},
@@ -544,7 +544,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:            "GET /agent-connect - no auth should succeed (websocket upgrade fails but route is accessible)",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/agent-connect",
+			URL:             "/api/sonar/agent-connect",
 			ExpectedStatus:  400,
 			ExpectedContent: []string{},
 			TestAppFactory:  testAppFactory,
@@ -552,7 +552,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "POST /test-notification - invalid auth token should fail",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/test-notification",
+			URL:    "/api/sonar/test-notification",
 			Body: jsonReader(map[string]any{
 				"url": "generic://127.0.0.1",
 			}),
@@ -566,7 +566,7 @@ func TestApiRoutesAuthentication(t *testing.T) {
 		{
 			Name:   "POST /user-alerts - invalid auth token should fail",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": "invalid-token",
 			},
@@ -602,7 +602,7 @@ func TestFirstUserCreation(t *testing.T) {
 			{
 				Name:   "POST /create-user - should be available when no users exist",
 				Method: http.MethodPost,
-				URL:    "/api/beszel/create-user",
+				URL:    "/api/sonar/create-user",
 				Body: jsonReader(map[string]any{
 					"email":    "firstuser@example.com",
 					"password": "password123",
@@ -632,7 +632,7 @@ func TestFirstUserCreation(t *testing.T) {
 			{
 				Name:   "POST /create-user - should not be available when users exist",
 				Method: http.MethodPost,
-				URL:    "/api/beszel/create-user",
+				URL:    "/api/sonar/create-user",
 				Body: jsonReader(map[string]any{
 					"email":    "firstuser@example.com",
 					"password": "password123",
@@ -649,10 +649,10 @@ func TestFirstUserCreation(t *testing.T) {
 	})
 
 	t.Run("CreateUserEndpoint not available when USER_EMAIL, USER_PASSWORD are set", func(t *testing.T) {
-		os.Setenv("BESZEL_HUB_USER_EMAIL", "me@example.com")
-		os.Setenv("BESZEL_HUB_USER_PASSWORD", "password123")
-		defer os.Unsetenv("BESZEL_HUB_USER_EMAIL")
-		defer os.Unsetenv("BESZEL_HUB_USER_PASSWORD")
+		os.Setenv("SONAR_HUB_USER_EMAIL", "me@example.com")
+		os.Setenv("SONAR_HUB_USER_PASSWORD", "password123")
+		defer os.Unsetenv("SONAR_HUB_USER_EMAIL")
+		defer os.Unsetenv("SONAR_HUB_USER_PASSWORD")
 
 		hub, _ := beszelTests.NewTestHub(t.TempDir())
 		defer hub.Cleanup()
@@ -666,7 +666,7 @@ func TestFirstUserCreation(t *testing.T) {
 		scenario := beszelTests.ApiScenario{
 			Name:            "POST /create-user - should not be available when USER_EMAIL, USER_PASSWORD are set",
 			Method:          http.MethodPost,
-			URL:             "/api/beszel/create-user",
+			URL:             "/api/sonar/create-user",
 			ExpectedStatus:  404,
 			ExpectedContent: []string{"wasn't found"},
 			TestAppFactory:  testAppFactory,
@@ -715,7 +715,7 @@ func TestCreateUserEndpointAvailability(t *testing.T) {
 		scenario := beszelTests.ApiScenario{
 			Name:   "POST /create-user - should be available when no users exist",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/create-user",
+			URL:    "/api/sonar/create-user",
 			Body: jsonReader(map[string]any{
 				"email":    "firstuser@example.com",
 				"password": "password123",
@@ -750,7 +750,7 @@ func TestCreateUserEndpointAvailability(t *testing.T) {
 		scenario := beszelTests.ApiScenario{
 			Name:   "POST /create-user - should not be available when users exist",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/create-user",
+			URL:    "/api/sonar/create-user",
 			Body: jsonReader(map[string]any{
 				"email":    "another@example.com",
 				"password": "password123",
@@ -787,7 +787,7 @@ func TestAutoLoginMiddleware(t *testing.T) {
 		{
 			Name:            "GET /getkey - without auto login should fail",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/getkey",
+			URL:             "/api/sonar/getkey",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -795,7 +795,7 @@ func TestAutoLoginMiddleware(t *testing.T) {
 		{
 			Name:            "GET /getkey - with auto login should fail if no matching user",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/getkey",
+			URL:             "/api/sonar/getkey",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -803,7 +803,7 @@ func TestAutoLoginMiddleware(t *testing.T) {
 		{
 			Name:            "GET /getkey - with auto login should succeed",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/getkey",
+			URL:             "/api/sonar/getkey",
 			ExpectedStatus:  200,
 			ExpectedContent: []string{"\"key\":", "\"v\":"},
 			TestAppFactory:  testAppFactory,
@@ -841,7 +841,7 @@ func TestTrustedHeaderMiddleware(t *testing.T) {
 		{
 			Name:            "GET /getkey - without trusted header should fail",
 			Method:          http.MethodGet,
-			URL:             "/api/beszel/getkey",
+			URL:             "/api/sonar/getkey",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -849,7 +849,7 @@ func TestTrustedHeaderMiddleware(t *testing.T) {
 		{
 			Name:   "GET /getkey - with trusted header should fail if no matching user",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/getkey",
+			URL:    "/api/sonar/getkey",
 			Headers: map[string]string{
 				"X-Beszel-Trusted": "user@test.com",
 			},
@@ -860,7 +860,7 @@ func TestTrustedHeaderMiddleware(t *testing.T) {
 		{
 			Name:   "GET /getkey - with trusted header should succeed",
 			Method: http.MethodGet,
-			URL:    "/api/beszel/getkey",
+			URL:    "/api/sonar/getkey",
 			Headers: map[string]string{
 				"X-Beszel-Trusted": "user@test.com",
 			},

@@ -5,10 +5,10 @@ package beszel
 import "github.com/blang/semver"
 
 const (
-	// Version is the current version of the application.
-	Version = "0.18.2"
-	// AppName is the name of the application.
-	AppName = "beszel"
+    // Version is the current version of the application.
+    Version = "0.18.2"
+    // AppName is the name of the application.
+    AppName = "sonar"
 )
 
 // MinVersionCbor is the minimum supported version for CBOR compatibility.

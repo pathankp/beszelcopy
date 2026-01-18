@@ -69,7 +69,7 @@ func TestUserAlertsApi(t *testing.T) {
 		// {
 		// 	Name:            "GET not implemented - returns index",
 		// 	Method:          http.MethodGet,
-		// 	URL:             "/api/beszel/user-alerts",
+		// 	URL:             "/api/sonar/user-alerts",
 		// 	ExpectedStatus:  200,
 		// 	ExpectedContent: []string{"<html ", "globalThis.BESZEL"},
 		// 	TestAppFactory:  testAppFactory,
@@ -77,7 +77,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:            "POST no auth",
 			Method:          http.MethodPost,
-			URL:             "/api/beszel/user-alerts",
+			URL:             "/api/sonar/user-alerts",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -85,7 +85,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "POST no body",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -96,7 +96,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "POST bad data",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -111,7 +111,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "POST malformed JSON",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -123,7 +123,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "POST valid alert data multiple systems",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -149,7 +149,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "POST valid alert data single system",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -170,7 +170,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "Overwrite: false, should not overwrite existing alert",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -204,7 +204,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "Overwrite: true, should overwrite existing alert",
 			Method: http.MethodPost,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user2Token,
 			},
@@ -238,7 +238,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:            "DELETE no auth",
 			Method:          http.MethodDelete,
-			URL:             "/api/beszel/user-alerts",
+			URL:             "/api/sonar/user-alerts",
 			ExpectedStatus:  401,
 			ExpectedContent: []string{"requires valid"},
 			TestAppFactory:  testAppFactory,
@@ -264,7 +264,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "DELETE alert",
 			Method: http.MethodDelete,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -293,7 +293,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "DELETE alert multiple systems",
 			Method: http.MethodDelete,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user1Token,
 			},
@@ -327,7 +327,7 @@ func TestUserAlertsApi(t *testing.T) {
 		{
 			Name:   "User 2 should not be able to delete alert of user 1",
 			Method: http.MethodDelete,
-			URL:    "/api/beszel/user-alerts",
+			URL:    "/api/sonar/user-alerts",
 			Headers: map[string]string{
 				"Authorization": user2Token,
 			},

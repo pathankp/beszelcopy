@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: sonar-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${SONAR_HUB_POSTGRES_DB:-sonar}
+      POSTGRES_USER: ${SONAR_HUB_POSTGRES_USER:-sonar}
+      POSTGRES_PASSWORD: ${SONAR_HUB_POSTGRES_PASSWORD:-sonar_dev_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${SONAR_HUB_POSTGRES_USER:-sonar}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # SONAR Hub
+  hub:
+    build:
+      context: .
+      dockerfile: Dockerfile.hub
+    container_name: sonar-hub
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # PostgreSQL Configuration
+      SONAR_HUB_POSTGRES_HOST: postgres
+      SONAR_HUB_POSTGRES_PORT: 5432
+      SONAR_HUB_POSTGRES_DB: ${SONAR_HUB_POSTGRES_DB:-sonar}
+      SONAR_HUB_POSTGRES_USER: ${SONAR_HUB_POSTGRES_USER:-sonar}
+      SONAR_HUB_POSTGRES_PASSWORD: ${SONAR_HUB_POSTGRES_PASSWORD:-sonar_dev_password}
+      SONAR_HUB_POSTGRES_SSLMODE: ${SONAR_HUB_POSTGRES_SSLMODE:-disable}
+      # Hub Configuration
+      SONAR_HUB_APP_URL: ${SONAR_HUB_APP_URL:-http://localhost:8090}
+      SONAR_HUB_USER_EMAIL: ${SONAR_HUB_USER_EMAIL:-admin@sonar.dev}
+      SONAR_HUB_USER_PASSWORD: ${SONAR_HUB_USER_PASSWORD:-admin123}
+      # Optional Settings
+      SONAR_HUB_DISABLE_PASSWORD_AUTH: ${SONAR_HUB_DISABLE_PASSWORD_AUTH:-false}
+      SONAR_HUB_USER_CREATION: ${SONAR_HUB_USER_CREATION:-true}
+      SONAR_HUB_MFA_OTP: ${SONAR_HUB_MFA_OTP:-false}
+      SONAR_HUB_SHARE_ALL_SYSTEMS: ${SONAR_HUB_SHARE_ALL_SYSTEMS:-false}
+      SONAR_HUB_CONTAINER_DETAILS: ${SONAR_HUB_CONTAINER_DETAILS:-true}
+    volumes:
+      - hub_data:/sonar_data
+    ports:
+      - "8090:8090"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8090/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # SONAR Agent (example)
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    container_name: sonar-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - agent_data:/var/lib/sonar-agent
+      # Monitor additional filesystems (example)
+      # - /mnt/disk/.sonar:/extra-filesystems/disk1:ro
+    environment:
+      SONAR_AGENT_LISTEN: ${SONAR_AGENT_LISTEN:-45876}
+      SONAR_AGENT_KEY: ${SONAR_AGENT_KEY:-}
+      SONAR_AGENT_TOKEN: ${SONAR_AGENT_TOKEN:-}
+      SONAR_AGENT_HUB_URL: ${SONAR_AGENT_HUB_URL:-http://localhost:8090}
+      SONAR_AGENT_LOG_LEVEL: ${SONAR_AGENT_LOG_LEVEL:-info}
+
+volumes:
+  postgres_data:
+    driver: local
+  hub_data:
+    driver: local
+  agent_data:
+    driver: local

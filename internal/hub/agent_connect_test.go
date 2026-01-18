@@ -590,7 +590,7 @@ func TestAgentConnect(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			req := httptest.NewRequest("GET", "/api/beszel/agent-connect", nil)
+			req := httptest.NewRequest("GET", "/api/sonar/agent-connect", nil)
 			for key, value := range tc.headers {
 				req.Header.Set(key, value)
 			}
@@ -714,7 +714,7 @@ func TestHandleAgentConnect(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			req := httptest.NewRequest(tc.method, "/api/beszel/agent-connect", nil)
+			req := httptest.NewRequest(tc.method, "/api/sonar/agent-connect", nil)
 			for key, value := range tc.headers {
 				req.Header.Set(key, value)
 			}
@@ -756,7 +756,7 @@ func TestAgentWebSocketIntegration(t *testing.T) {
 
 	// Create HTTP server with the actual API route
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/beszel/agent-connect" {
+		if r.URL.Path == "/api/sonar/agent-connect" {
 			acr := &agentConnectRequest{
 				hub: hub,
 				req: r,
@@ -877,11 +877,11 @@ func TestAgentWebSocketIntegration(t *testing.T) {
 			require.NoError(t, err)
 
 			// Set up environment variables for the agent
-			os.Setenv("BESZEL_AGENT_HUB_URL", ts.URL)
-			os.Setenv("BESZEL_AGENT_TOKEN", tc.agentToken)
+			os.Setenv("SONAR_AGENT_HUB_URL", ts.URL)
+			os.Setenv("SONAR_AGENT_TOKEN", tc.agentToken)
 			defer func() {
-				os.Unsetenv("BESZEL_AGENT_HUB_URL")
-				os.Unsetenv("BESZEL_AGENT_TOKEN")
+				os.Unsetenv("SONAR_AGENT_HUB_URL")
+				os.Unsetenv("SONAR_AGENT_TOKEN")
 			}()
 
 			// Start agent in background
@@ -993,7 +993,7 @@ func TestMultipleSystemsWithSameUniversalToken(t *testing.T) {
 
 	// Create HTTP server with the actual API route
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/beszel/agent-connect" {
+		if r.URL.Path == "/api/sonar/agent-connect" {
 			acr := &agentConnectRequest{
 				hub: hub,
 				req: r,
@@ -1058,11 +1058,11 @@ func TestMultipleSystemsWithSameUniversalToken(t *testing.T) {
 			require.NoError(t, err)
 
 			// Set up environment variables for the agent
-			os.Setenv("BESZEL_AGENT_HUB_URL", ts.URL)
-			os.Setenv("BESZEL_AGENT_TOKEN", universalToken)
+			os.Setenv("SONAR_AGENT_HUB_URL", ts.URL)
+			os.Setenv("SONAR_AGENT_TOKEN", universalToken)
 			defer func() {
-				os.Unsetenv("BESZEL_AGENT_HUB_URL")
-				os.Unsetenv("BESZEL_AGENT_TOKEN")
+				os.Unsetenv("SONAR_AGENT_HUB_URL")
+				os.Unsetenv("SONAR_AGENT_TOKEN")
 			}()
 
 			// Count systems before connection
@@ -1197,7 +1197,7 @@ func TestPermanentUniversalTokenFromDB(t *testing.T) {
 
 	// Create HTTP server with the actual API route
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/beszel/agent-connect" {
+		if r.URL.Path == "/api/sonar/agent-connect" {
 			acr := &agentConnectRequest{
 				hub: hub,
 				req: r,
@@ -1219,11 +1219,11 @@ func TestPermanentUniversalTokenFromDB(t *testing.T) {
 	require.NoError(t, err)
 
 	// Set up environment variables for the agent
-	os.Setenv("BESZEL_AGENT_HUB_URL", ts.URL)
-	os.Setenv("BESZEL_AGENT_TOKEN", universalToken)
+	os.Setenv("SONAR_AGENT_HUB_URL", ts.URL)
+	os.Setenv("SONAR_AGENT_TOKEN", universalToken)
 	defer func() {
-		os.Unsetenv("BESZEL_AGENT_HUB_URL")
-		os.Unsetenv("BESZEL_AGENT_TOKEN")
+		os.Unsetenv("SONAR_AGENT_HUB_URL")
+		os.Unsetenv("SONAR_AGENT_TOKEN")
 	}()
 
 	// Start agent in background

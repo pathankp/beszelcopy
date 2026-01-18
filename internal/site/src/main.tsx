@@ -33,7 +33,7 @@ const App = memo(() => {
 			$authenticated.set(pb.authStore.isValid)
 		})
 		// get version / public key
-		pb.send("/api/beszel/getkey", {}).then((data) => {
+		pb.send("/api/sonar/getkey", {}).then((data) => {
 			$publicKey.set(data.key)
 		})
 		// get user settings

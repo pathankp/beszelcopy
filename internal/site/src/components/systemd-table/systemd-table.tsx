@@ -282,7 +282,7 @@ function SystemdSheet({
 		setDetails(null)
 		setIsLoading(true)
 
-		pb.send<{ details: SystemdServiceDetails }>("/api/beszel/systemd/info", {
+		pb.send<{ details: SystemdServiceDetails }>("/api/sonar/systemd/info", {
 			query: {
 				system: systemId,
 				service: service.name,

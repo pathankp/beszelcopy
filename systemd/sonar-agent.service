@@ -1,0 +1,32 @@
+[Unit]
+Description=SONAR Agent - System Monitoring Agent
+Documentation=https://github.com/henrygd/beszel
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/local/bin/sonar-agent
+Restart=on-failure
+RestartSec=10s
+
+# Environment variables (alternatively, use EnvironmentFile)
+# Environment="SONAR_AGENT_LISTEN=45876"
+# Environment="SONAR_AGENT_KEY=your-public-key-here"
+# Environment="SONAR_AGENT_TOKEN=your-token-here"
+# Environment="SONAR_AGENT_HUB_URL=ws://your-hub:8090"
+# Environment="SONAR_AGENT_LOG_LEVEL=info"
+
+# Or use an environment file
+# EnvironmentFile=/etc/sonar-agent/env
+
+# Security settings
+# PrivateTmp=yes
+# NoNewPrivileges=true
+
+# Resource limits
+# LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
